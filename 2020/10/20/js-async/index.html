@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;stephenchan255.github.io&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;blog&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:-1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="async actions: init now but finish later (code below it won’t wait) .. CallbackloadScript(&#39;xxx.js&#39;, (error, script) &#x3D;&gt; &amp;#123; .. &amp;#125;) (“error-1st” cb style) ..: cb hell &#x2F; pyramid of doom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Async programming &amp; network request in JavaScript">
+<meta property="og:url" content="https://stephenchan255.github.io/blog/2020/10/20/js-async/index.html">
+<meta property="og:site_name" content="Stephen&#39;s notes">
+<meta property="og:description" content="async actions: init now but finish later (code below it won’t wait) .. CallbackloadScript(&#39;xxx.js&#39;, (error, script) &#x3D;&gt; &amp;#123; .. &amp;#125;) (“error-1st” cb style) ..: cb hell &#x2F; pyramid of doom">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-20T11:32:55.000Z">
+<meta property="article:modified_time" content="2021-09-05T16:20:05.356Z">
+<meta property="article:author" content="Stephen Chan">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://stephenchan255.github.io/blog/2020/10/20/js-async/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;stephenchan255.github.io&#x2F;blog&#x2F;2020&#x2F;10&#x2F;20&#x2F;js-async&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;10&#x2F;20&#x2F;js-async&#x2F;&quot;,&quot;title&quot;:&quot;Async programming &amp; network request in JavaScript&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Async programming & network request in JavaScript | Stephen's notes</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Stephen's notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Contents keep updating ...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-compoter-science"><a href="/blog/computer_science/" rel="section"><i class="fa fa-desktop fa-fw"></i>Compoter Science</a></li>
+        <li class="menu-item menu-item-programming"><a href="/blog/programming/" rel="section"><i class="fa fa-code fa-fw"></i>Programming</a></li>
+        <li class="menu-item menu-item-java"><a href="/blog/java/" rel="section"><i class="fab fa-java fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-javascript"><a href="/blog/categories/IT/Programming/JavaScript/" rel="section"><i class="fab fa-js fa-fw"></i>JavaScript</a></li>
+        <li class="menu-item menu-item-cpp"><a href="/blog/cpp/" rel="section"><i class="fab fa-cuttlefish fa-fw"></i>Cpp</a></li>
+        <li class="menu-item menu-item-config"><a href="/blog/config/" rel="section"><i class="fa fa-cog fa-fw"></i>Config</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">5</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Callback"><span class="nav-number">1.</span> <span class="nav-text">Callback</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise"><span class="nav-number">2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abort-async-task-AbortController"><span class="nav-number">3.</span> <span class="nav-text">Abort async task: AbortController</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network-request"><span class="nav-number">4.</span> <span class="nav-text">Network request</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch-amp-XHR"><span class="nav-number">4.1.</span> <span class="nav-text">fetch &amp; XHR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS"><span class="nav-number">4.2.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch-amp-CORS"><span class="nav-number">4.3.</span> <span class="nav-text">Fetch &amp; CORS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-S-communication-Polling-amp-WebSocket"><span class="nav-number">4.4.</span> <span class="nav-text">B&#x2F;S communication: Polling &amp; WebSocket</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Storing-data-in-the-browser"><span class="nav-number">5.</span> <span class="nav-text">Storing data in the browser</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie"><span class="nav-number">5.1.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-storage-obj-local-sessionStorage"><span class="nav-number">5.2.</span> <span class="nav-text">Web storage obj: local&#x2F;sessionStorage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#indexedDB"><span class="nav-number">5.3.</span> <span class="nav-text">indexedDB</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Chan"
+      src="/blog/images/apple-touch-icon-next.png">
+  <p class="site-author-name" itemprop="name">Stephen Chan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stephenchan255" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;stephenchan255" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/stephen-chan255/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;stephen-chan255&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stephen.chan255@hotmail.com" title="E-Mail → mailto:stephen.chan255@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stephenchan255.github.io/portfolio/" title="Portfolio → https:&#x2F;&#x2F;stephenchan255.github.io&#x2F;portfolio&#x2F;"><i class="fa fa-globe fa-fw"></i>Portfolio</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://youtube.com/" title="http:&#x2F;&#x2F;youtube.com" rel="noopener" target="_blank">Youtube</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/stephenchan255" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://stephenchan255.github.io/blog/2020/10/20/js-async/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/apple-touch-icon-next.png">
+      <meta itemprop="name" content="Stephen Chan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stephen's notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Async programming & network request in JavaScript
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-20 19:32:55" itemprop="dateCreated datePublished" datetime="2020-10-20T19:32:55+08:00">2020-10-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-09-06 00:20:05" itemprop="dateModified" datetime="2021-09-06T00:20:05+08:00">2021-09-06</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>async</strong> actions: init now but finish later (code below it won’t wait) <a target="_blank" rel="noopener" href="https://javascript.info/callbacks">..</a></p>
+<h1 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h1><p><code>loadScript(&#39;xxx.js&#39;, (error, script) =&gt; &#123; .. &#125;)</code> (“error-1st” cb style) <a target="_blank" rel="noopener" href="https://javascript.info/callbacks#handling-errors">..</a>: cb hell / pyramid of doom<br><strong>Fn Call Scheduling</strong>: <code>setTimeout/setInterval(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval">..</a> (enqueue in macrotask <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#event-loop">..</a>)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> timerId = <span class="built_in">setTimeout</span>/<span class="built_in">setInterval</span>(fn, delay=<span class="number">0</span>, ...args); <span class="comment">// keep fn-ref in scheduler (not GC) </span></span><br><span class="line"><span class="built_in">clearTimeout</span>/<span class="built_in">clearInterval</span>(timerId); <span class="comment">// &quot;timerId keep same&quot; af clear (not null)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>setTimeout()</strong>: set <code>this=window</code> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></li>
+<li><strong>setInterval()</strong>: fn-exe-time &gt; delay? <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval#nested-settimeout">…</a></li>
+<li><strong>nested setTimeout</strong> vs setInterval ..</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval#output-every-second">Output every second</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><p><code>new Promise((resolve, reject) =&gt; .. ).then(value =&gt; .. ).catch(err =&gt; .. ).finally(fn)</code> <a target="_blank" rel="noopener" href="https://javascript.info/promise-basics">..</a></p>
+<ul>
+<li>error occur in setTimeout (except <code>reject(err)</code>) not catched <a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#error-in-settimeout">..</a></li>
+<li>unhandlerd rejection &amp; window <code>unhandledrejection</code> event <a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#unhandled-rejections">..</a></li>
+<li>cb vs promise: promise only single result (cb can be called mtp times) <a target="_blank" rel="noopener" href="https://javascript.info/promisify">..</a></li>
+</ul>
+<p><code>async/await</code> <a target="_blank" rel="noopener" href="https://javascript.info/async-await#summary">..</a></p>
+<ul>
+<li><code>async</code> bf fn: return a promise &amp; enable <code>await</code></li>
+<li><code>await</code> &amp; <code>try-catch</code> — promise.then() &amp; catch()</li>
+</ul>
+<p>Promise API</p>
+<ul>
+<li><code>let promise = Promise.all/allSettled/race(...promises);</code> <a target="_blank" rel="noopener" href="https://javascript.info/promise-api">..</a><ul>
+<li><code>Promise.all()</code>: all resolved or reject</li>
+<li><code>Promise.allSettled()</code>: <code>[...&#123; status: &#39;fulfilled/rejected&#39;, value/reason: xxx &#125;]</code></li>
+<li><code>Promise.race()</code>: <strong>1st settled</strong> promise.result</li>
+</ul>
+</li>
+<li><code>Promise.resolve(value)/reject(err)</code>: a resolved / rejected promise, same as<br><code>new Promise((resolve, reject) =&gt; resolve(value) || reject(error))</code></li>
+</ul>
+<h1 id="Abort-async-task-AbortController"><a href="#Abort-async-task-AbortController" class="headerlink" title="Abort async task: AbortController"></a>Abort async task: AbortController</h1><ul>
+<li>when call <code>ctrller.abort()</code> called <a target="_blank" rel="noopener" href="https://javascript.info/fetch-abort">..</a><ul>
+<li><code>ctrller.signal</code> emit <code>abort</code> event (<code>ctrller.signal.aborted</code> = true) </li>
+<li><code>ctrller.signal.addEL(&#39;abort&#39;, handler)</code> </li>
+</ul>
+</li>
+<li>abort fetch op: <code>fetch(url, &#123; signal: ctrller.signal &#125;)</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-abort#using-with-fetch">..</a><ul>
+<li>when <code>ctrller.abort()</code> called, fetch get event from <code>signal</code> then aborted &amp; promise rejected with <code>AbortError</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="Network-request"><a href="#Network-request" class="headerlink" title="Network request"></a>Network request</h1><p><a target="_blank" rel="noopener" href="https://javascript.info/fetch" title="Async JS And XML">AJAX</a>: load new info without page reload</p>
+<ul>
+<li>network method <a target="_blank" rel="noopener" href="https://javascript.info/formdata">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events">..</a>: fetcch</li>
+<li>built-in obj to make HTTP requests: XHR <a target="_blank" rel="noopener" href="https://javascript.info/xmlhttprequest">..</a></li>
+</ul>
+<h2 id="fetch-amp-XHR"><a href="#fetch-amp-XHR" class="headerlink" title="fetch &amp; XHR"></a>fetch &amp; XHR</h2><p>network method <code>fetch(url, [request-options])</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch">..</a> — <a target="_blank" rel="noopener" href="https://javascript.info/fetch-api">fetch API</a></p>
+<ul>
+<li><code>fetch(url)</code>: <a href="" title="download content of the url">GET</a> request</li>
+<li><code>request-options</code>: <code>&#123; method, headers: &#123; &#39;Content-Type&#39; .. &#125;, body &#125;</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch#post-requests">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/fetch#request-headers">..</a><ul>
+<li>body: <a target="_blank" rel="noopener" href="https://javascript.info/fetch#post-requests">JSON</a>, <a target="_blank" rel="noopener" href="https://javascript.info/fetch#sending-an-image">imgBlob</a>, <a target="_blank" rel="noopener" href="https://javascript.info/formdata">FormData</a> (inputs, file, Blob ..) <a target="_blank" rel="noopener" href="https://javascript.info/fetch#post-requests">…</a></li>
+</ul>
+</li>
+</ul>
+<p>2-stage response</p>
+<ul>
+<li><code>await fetch(..): response</code>: server response with headers (returned promise resolve with obj of Response) <a target="_blank" rel="noopener" href="https://javascript.info/fetch">..</a> <ul>
+<li><code>response.status</code>, <code>response.ok</code> (if HTTP-status 200-299 — 404 / 500 do not cause promise reject)</li>
+<li><code>response.headers</code>: map-like obj <a target="_blank" rel="noopener" href="https://javascript.info/fetch#response-headers">..</a></li>
+</ul>
+</li>
+<li>get response body: <code>response.json()/blob() ..</code> (asyn) <a target="_blank" rel="noopener" href="https://javascript.info/fetch">…</a> </li>
+</ul>
+<p>progress track</p>
+<ul>
+<li>download: <code>response.body.getReader().read(): &#123;done, value&#125;</code> &amp; <code>+response.headers.get(&#39;Content-Length&#39;)</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-progress">..</a><ul>
+<li><code>response.body</code>: <code>ReadableStream</code>, repeatedly call read() to read body chunk-by-chunk &amp; concat <code>value.length</code></li>
+</ul>
+</li>
+<li>upload: <code>xhr.upload.onprocess</code> &amp; <code>e.loaded / e.total</code> <a target="_blank" rel="noopener" href="https://javascript.info/xmlhttprequest#upload-progress">..</a><ul>
+<li><code>xhr.upload.onprocess</code>: trigger when data sent <a target="_blank" rel="noopener" href="https://javascript.info/resume-upload#not-so-useful-progress-event">..</a> — <a target="_blank" rel="noopener" href="https://javascript.info/resume-upload#algorithm">resume file upload algorithm</a></li>
+<li><code>xhr.onprogress</code>: trigger when download response <a target="_blank" rel="noopener" href="https://javascript.info/xmlhttprequest#the-basics">..</a> (a data packet of the response arrived <a target="_blank" rel="noopener" href="https://javascript.info/xmlhttprequest#summary">..</a>)</li>
+</ul>
+</li>
+</ul>
+<p>Task: <a target="_blank" rel="noopener" href="https://javascript.info/fetch#fetch-users-from-github">getGithubUsers(names)</a></p>
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><ul>
+<li>origin: “protocol://domain:port” <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#accessing-popup-from-window">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/url#creating-a-url">..</a> &amp; same origin policy: only allow to set <code>location</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#same-origin">..</a> &amp; get ref of <code>iframe.contentWindow</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#in-action-iframe">..</a><ul>
+<li>make same 2nd-level domain wins <strong>same origin</strong>: <code>document.domain = &#39;site.com&#39;</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#windows-on-subdomains-document-domain">..</a></li>
+</ul>
+</li>
+<li>cross-win msg (from any origin) — win <code>postMessage(..)</code> interface <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#cross-window-messaging">..</a><ul>
+<li>sender-win call <code>receiverWin.postMessage(..)</code> — trigger <code>receiverWin.message</code> event in receiver-win</li>
+<li>note: add handler to <code>receiverWin.message</code> event by <code>addEventHandler()</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#onmessage">..</a></li>
+</ul>
+</li>
+<li>the old ways to work around cors: <code>&lt;form&gt;</code> &amp; <code>&lt;script&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#why-is-cors-needed-a-brief-history">…</a><ul>
+<li><code>&lt;form target=&quot;iframe&quot; ..&gt;</code>: open action.url in ifame</li>
+<li>script &amp; JSONP protocol: <code>&lt;script src=&quot;another-site.com?callback=xxx&quot;&gt;</code><ul>
+<li>remote dynamically generates a script, load and exe &amp; call our local fn <code>xxx(data)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Fetch-amp-CORS"><a href="#Fetch-amp-CORS" class="headerlink" title="Fetch &amp; CORS"></a>Fetch &amp; CORS</h2><p>Cross-origin requests &amp; special response headers <a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin">…</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#simple-requests">simple request</a>: browser send header <code>Origin</code> — <code>Access-Control-Allow-Origin</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#cors-for-simple-requests">…</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#simple-requests">non-simple request</a>: browser extra “preflight” request (ask for permission 1st)<ul>
+<li>method <code>OPTIONS</code> + <code>A-C-Request-Method</code> / <code>*-Headers</code> — <code>A-C-A-Origin</code>/<code>*-Methods</code> / <code>*-Headers</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#non-simple-requests">…</a></li>
+</ul>
+</li>
+<li>js default accessible response headers — <code>Access-Control-Expose-Headers</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#response-headers">…</a></li>
+<li>request with credentials <a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#credentials">…</a>, <a target="_blank" rel="noopener" href="https://javascript.info/fetch-api#credentials">..</a></li>
+<li>request header: <code>Origin</code> vs <code>Referer</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-crossorigin#why-do-we-need-origin">…</a> — fetch <code>referrer, referrerPolicy</code> option <a target="_blank" rel="noopener" href="https://javascript.info/fetch-api">…</a></li>
+<li>http code 301, 302 &amp; fetch option <code>redirect</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-api#redirect">…</a></li>
+<li>window.onunload &amp; fetch option <code>keepalive</code> <a target="_blank" rel="noopener" href="https://javascript.info/fetch-api#keepalive">…</a>  </li>
+</ul>
+<h2 id="B-S-communication-Polling-amp-WebSocket"><a href="#B-S-communication-Polling-amp-WebSocket" class="headerlink" title="B/S communication: Polling &amp; WebSocket"></a>B/S communication: Polling &amp; WebSocket</h2><p>Get msg from server</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/long-polling#regular-polling">Regular polling</a>: msg pass delay, server bombed with requests</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/long-polling#long-polling">Long polling</a>: request (e.g. <strong>fetch</strong>) → server keep conn open until response with data → <strong>response</strong> process &amp; re-request<ul>
+<li>good when msgs rare <a target="_blank" rel="noopener" href="https://javascript.info/long-polling#area-of-usage">..</a></li>
+<li>timeout status 502 </li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events">Server Sent Events</a> <code>EventSource</code> — vs <code>WebSocket</code>: ES support auto-reconn<ul>
+<li><code>new EventSource(url, ..)</code>: start conn <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#getting-messages">..</a> — <code>open</code> (connected) / <code>error</code> event (response wrong <code>Content-Type</code> / HTTP status (e.g. 500 <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#event-types">..</a>) <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#reconnection">..</a>)</li>
+<li>server send data (response 200 &amp; <code>Content-Type: text/..</code> to write text msg) <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#getting-messages">..</a><ul>
+<li><code>message</code> event: <code>es.onmessage(e.data)</code>  </li>
+<li>custom event: <code>es.addEL(..)</code> (data come with <code>event</code> field) <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#event-types">..</a></li>
+</ul>
+</li>
+<li>browser close conn: <code>es.close()</code> <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#reconnection">..</a></li>
+<li>no reconn: response 204 | <code>error</code> event <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#reconnection">..</a><ul>
+<li>check if reconn when error: <code>es.onerror</code> <code>es.readyState === EventSource.CONNECTING</code> <a target="_blank" rel="noopener" href="https://javascript.info/server-sent-events#full-example">..</a></li>
+</ul>
+</li>
+<li>response msg fields: <code>retry</code> (for timeout), <code>event</code> (for custom events), <code>data</code>, <code>id</code> (for reconn) …</li>
+</ul>
+</li>
+</ul>
+<p>Data exchange: <a target="_blank" rel="noopener" href="https://javascript.info/websocket">WebSocket</a>: persistent conn, no cors limitation <a target="_blank" rel="noopener" href="https://javascript.info/websocket#summary">..</a></p>
+<ul>
+<li><code>new WebSocket(&quot;wss://xxx    &quot;, ..)</code>: start conn <a target="_blank" rel="noopener" href="https://javascript.info/websocket#opening-a-websocket">..</a> — <code>open</code> event: connected<ul>
+<li><code>wss://</code> protocol (WebSocket over TLS) <a target="_blank" rel="noopener" href="https://javascript.info/websocket#a-simple-example">..</a></li>
+</ul>
+</li>
+<li>data exchange: <code>ws.send(data)</code> &amp; <code>ws.onmessage(e.data)</code> <a target="_blank" rel="noopener" href="https://javascript.info/websocket#a-simple-example">..</a><ul>
+<li>data type: only string/bin in browser (“frame”) <a target="_blank" rel="noopener" href="https://javascript.info/websocket#data-transfer">..</a></li>
+<li><code>ws.send(data)</code> onopen — <code>ws.bufferedAmount</code>: # of bytes to be sent (when network slow) <a target="_blank" rel="noopener" href="https://javascript.info/websocket#rate-limiting">..</a></li>
+</ul>
+</li>
+<li>conn close: <code>ws.close(code=1000, reason);</code> &amp; <code>ws.onclose</code>:<code>e.code/reason/wasClean</code> <a target="_blank" rel="noopener" href="https://javascript.info/websocket#connection-close">…</a></li>
+</ul>
+<h1 id="Storing-data-in-the-browser"><a href="#Storing-data-in-the-browser" class="headerlink" title="Storing data in the browser"></a>Storing data in the browser</h1><h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie: <code>name=value;</code> pairs stored in browser <a target="_blank" rel="noopener" href="https://javascript.info/cookie#reading-from-document-cookie">..</a></p>
+<ul>
+<li>part of HTTP protocol <a target="_blank" rel="noopener" href="https://javascript.info/cookie">..</a><ul>
+<li>request to server &amp; server set a corresponding cookie using response <code>Set-Cookie</code> HTTP-header</li>
+<li>subsequent request to the same domain, browser auto add them (in <code>Cookie</code> HTTP-header) , e.g. in auth</li>
+</ul>
+</li>
+<li>read/write by <code>document.cookie</code> <a target="_blank" rel="noopener" href="https://javascript.info/cookie#reading-from-document-cookie">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/cookie#writing-to-document-cookie">..</a><ul>
+<li>4kb/cookie, 20+/site (for network transfer limitation) <a target="_blank" rel="noopener" href="https://javascript.info/cookie#writing-to-document-cookie">..</a></li>
+<li>unaccessible to js if <code>httpOnly</code> option set <a target="_blank" rel="noopener" href="https://javascript.info/cookie#httponly">..</a></li>
+</ul>
+</li>
+<li>cookie options …<ul>
+<li>by default, cookie rmed af browser close (session cookie) — <code>expires</code> / <code>max-age</code> <a target="_blank" rel="noopener" href="https://javascript.info/cookie#expires-max-age">..</a></li>
+<li><code>secure</code>: only accessible over HTTPS (if set in <code>https://</code>) <a target="_blank" rel="noopener" href="https://javascript.info/cookie#secure">..</a></li>
+<li><code>samesite</code>: prevent XSRF attack — not sent cookie if request comes from outside <a target="_blank" rel="noopener" href="https://javascript.info/cookie#samesite">..</a><ul>
+<li>only work for browser af 2017, ignored by old browsers — use with the old solution</li>
+<li><strong>XSRF attack</strong>: user submit a form to <code>bank.com</code> in <code>evil.com</code> &amp; browser auto-sent auth-cookie</li>
+<li>old solution: forms generated by <code>bank.com</code> have a special “XSRF protection token” &amp; when receive form, <code>bank.com</code> checks for such token</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3rd-party cookies: set by domain other than the page visiting <a target="_blank" rel="noopener" href="https://javascript.info/cookie#appendix-third-party-cookies">..</a><ul>
+<li>the cookie bound to the domain, can use to track user when moves btn sites</li>
+<li>GDPR enforce explicit user permission to set it</li>
+</ul>
+</li>
+</ul>
+<h2 id="Web-storage-obj-local-sessionStorage"><a href="#Web-storage-obj-local-sessionStorage" class="headerlink" title="Web storage obj: local/sessionStorage"></a>Web storage obj: local/sessionStorage</h2><p>save key/value pairs (str-only <a target="_blank" rel="noopener" href="https://javascript.info/localstorage#strings-only">..</a>) in browser by <strong>web storage obj</strong> <a target="_blank" rel="noopener" href="https://javascript.info/localstorage">..</a></p>
+<ul>
+<li><code>localStorage</code>: data shared btn all wins with the <strong>same origin</strong> &amp; not expire <a target="_blank" rel="noopener" href="https://javascript.info/localstorage#localstorage-demo">..</a></li>
+<li><code>sessionStorage</code>: only <strong>current browser tab</strong> (even page refresh, but not re-open) <a target="_blank" rel="noopener" href="https://javascript.info/localstorage#sessionstorage">..</a></li>
+<li>browser storage obj vs cookie: not sent to server, so larger storage (up to 5mb <a target="_blank" rel="noopener" href="https://javascript.info/localstorage#summary">..</a>) <a target="_blank" rel="noopener" href="https://javascript.info/localstorage">..</a></li>
+<li><code>window.onstorage</code> event: triggers when data updated in <code>local/sessionStorage</code> <a target="_blank" rel="noopener" href="https://javascript.info/localstorage#storage-event">…</a></li>
+<li>triggers on all win-obj where the storage accessible, except the causing one — allow same origin wins to exchange msgs</li>
+<li>task: Autosave a form field</li>
+</ul>
+<h2 id="indexedDB"><a href="#indexedDB" class="headerlink" title="indexedDB"></a>indexedDB</h2><p>indexedDB: mtp types of key/value, bigger storage (intended for offline apps), support transaction <a target="_blank" rel="noopener" href="https://javascript.info/indexeddb">…</a></p>
+<ul>
+<li><code>let openRequest = indexedDB.open(DBNname: str, schemaVersionNo: int);</code>: conn to a DB, bound to current origin</li>
+<li>openRequest obj events:<ul>
+<li><code>error</code> &amp; <code>console.error(&quot;Error&quot;, openRequest.error)</code></li>
+<li><code>success</code> &amp; <code>let db = openRequest.result</code></li>
+<li><code>upgradeneeded</code>: when client local db version <code>e.oldVersion</code> &lt; arg <code>schemaVersionNo</code> <code>e.newVersion</code><ul>
+<li>e.g. user come 1st time (db not exist yet, version = 0), </li>
+<li>or client load old code (prevent by HTTP caching headers, or prompt reload page)</li>
+<li>handler finishes without errs =&gt; trigger <code>openRequest.onsuccess</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Parallel update problem: both old/new db conn exists (in diff tabs)<ul>
+<li><code>versionchange</code> event trigger in tab1 (old version db conn): close old db conn &amp; reload page (see <code>db.onversionchange</code>)</li>
+<li>if old db conn not close,  <code>open()</code> in tab2 trigger <code>block</code> event (ask tab2 user to close other tabs for update)</li>
+<li>variants ..</li>
+</ul>
+</li>
+<li>delete db by <code>let deleteRequest = indexedDB.deleteDatabase(name)</code><ul>
+<li>check <code>deleteRequest.onsuccess/onerror</code> for deletion result</li>
+</ul>
+</li>
+<li>object store (i.e. table in RDB)<ul>
+<li><code>db.create/deleteObjectStore(..), objectStoreNames.contains(..)</code> ..</li>
+<li>created/removed/altered obj-store only in <code>upgradeneeded</code> handler (auto-generate a <code>versionchange</code> transaction)</li>
+<li>can make data-ops outside <code>upgradeneeded</code> handler </li>
+<li>obj-store CRUD requests<ul>
+<li>search by key: <code>IDBKeyRange</code> obj &amp; <code>store.get*([query])</code> (values sorted by key order) ..<br>  by other fields by <code>index</code> (return a obj-store-liked obj keyed by that field, could mtp-value) ..</li>
+<li>add/update &amp; delete data request: <code>store.add/put(obj)</code>, <code>store.delete(..)/clear()</code></li>
+</ul>
+</li>
+<li>iter obj-store by <code>cursor</code> ..</li>
+</ul>
+</li>
+<li>transaction<ul>
+<li>starts t &amp; get it obj-store: <code>let t = db.transaction(..)</code> <code>let books = t.objectStore(&quot;books&quot;)</code><br>&amp; other request cmds</li>
+<li><code>request.onsuccess/error</code> &amp; <code>request.result/error</code></li>
+<li>all t.requests finish =&gt; microtasks queue empty =&gt; auto-commit =&gt; <code>t.oncomplete</code> event<ul>
+<li>async ops/macrotask not allowed btn t.requests: t closed bf macrotasks starts =&gt; <code>TransactionInactiveError</code></li>
+<li>solution: split t ops &amp; macrotasks/async ops apart ..</li>
+</ul>
+</li>
+<li><code>t.abort()</code> &amp; <code>t.onabort</code> event, <code>t.error</code><ul>
+<li>failed request auto abort t, can be prevent in <code>request.onerror</code> handler by <code>e.preventDefault()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IndexedDB events bubble: <code>request</code> → <code>transaction</code> → <code>database</code><ul>
+<li><code>db.onerror = function(event) &#123; let request = event.target.. &#125;</code></li>
+</ul>
+</li>
+<li>Promise wrapper &amp; <code>try..catch</code> vs Adding <code>onsuccess/onerror</code> to every request</li>
+<li>demo in summary ..</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/IT/" rel="tag"># IT</a>
+              <a href="/blog/tags/Programming/" rel="tag"># Programming</a>
+              <a href="/blog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2020/10/18/js-dom/" rel="prev" title="JavaScript & DOM">
+                  <i class="fa fa-chevron-left"></i> JavaScript & DOM
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2020/10/22/js-miscellaneous/" rel="next" title="JavaScript miscellaneous">
+                  JavaScript miscellaneous <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Chan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

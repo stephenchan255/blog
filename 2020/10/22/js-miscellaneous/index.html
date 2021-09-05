@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;stephenchan255.github.io&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;blog&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:-1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="Chrome console &amp; DebuggingChrome console .. &amp; debuging in chrome ..  logging with console.log(...) breakpoints &amp; debugger cmd, execution tracking …  ‘use strict’To enable ES5  off by defau">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript miscellaneous">
+<meta property="og:url" content="https://stephenchan255.github.io/blog/2020/10/22/js-miscellaneous/index.html">
+<meta property="og:site_name" content="Stephen&#39;s notes">
+<meta property="og:description" content="Chrome console &amp; DebuggingChrome console .. &amp; debuging in chrome ..  logging with console.log(...) breakpoints &amp; debugger cmd, execution tracking …  ‘use strict’To enable ES5  off by defau">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-22T11:08:31.000Z">
+<meta property="article:modified_time" content="2021-09-05T16:20:05.357Z">
+<meta property="article:author" content="Stephen Chan">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://stephenchan255.github.io/blog/2020/10/22/js-miscellaneous/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;stephenchan255.github.io&#x2F;blog&#x2F;2020&#x2F;10&#x2F;22&#x2F;js-miscellaneous&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;10&#x2F;22&#x2F;js-miscellaneous&#x2F;&quot;,&quot;title&quot;:&quot;JavaScript miscellaneous&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>JavaScript miscellaneous | Stephen's notes</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Stephen's notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Contents keep updating ...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-compoter-science"><a href="/blog/computer_science/" rel="section"><i class="fa fa-desktop fa-fw"></i>Compoter Science</a></li>
+        <li class="menu-item menu-item-programming"><a href="/blog/programming/" rel="section"><i class="fa fa-code fa-fw"></i>Programming</a></li>
+        <li class="menu-item menu-item-java"><a href="/blog/java/" rel="section"><i class="fab fa-java fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-javascript"><a href="/blog/categories/IT/Programming/JavaScript/" rel="section"><i class="fab fa-js fa-fw"></i>JavaScript</a></li>
+        <li class="menu-item menu-item-cpp"><a href="/blog/cpp/" rel="section"><i class="fab fa-cuttlefish fa-fw"></i>Cpp</a></li>
+        <li class="menu-item menu-item-config"><a href="/blog/config/" rel="section"><i class="fa fa-cog fa-fw"></i>Config</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">5</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chrome-console-amp-Debugging"><span class="nav-number">1.</span> <span class="nav-text">Chrome console &amp; Debugging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-types"><span class="nav-number">3.</span> <span class="nav-text">Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">3.1.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">3.2.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-advanced"><span class="nav-number">4.</span> <span class="nav-text">Obj advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-type"><span class="nav-number">4.1.</span> <span class="nav-text">Symbol type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-prop-config"><span class="nav-number">4.2.</span> <span class="nav-text">Obj prop config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-iter"><span class="nav-number">4.3.</span> <span class="nav-text">Key iter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">4.4.</span> <span class="nav-text">Global obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Primitive-as-Obj"><span class="nav-number">4.5.</span> <span class="nav-text">Primitive as Obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-to-primitive"><span class="nav-number">4.6.</span> <span class="nav-text">Obj to primitive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal-Event-loop"><span class="nav-number">5.</span> <span class="nav-text">JS engine internal: Event loop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Popup-win-amp-iframe"><span class="nav-number">6.</span> <span class="nav-text">Popup win &amp; iframe</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bin-data-files"><span class="nav-number">7.</span> <span class="nav-text">Bin data, files</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BufferSource"><span class="nav-number">7.1.</span> <span class="nav-text">BufferSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blob"><span class="nav-number">7.2.</span> <span class="nav-text">Blob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-amp-FileReader"><span class="nav-number">7.3.</span> <span class="nav-text">File &amp; FileReader</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URL-object"><span class="nav-number">8.</span> <span class="nav-text">URL object</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-Components"><span class="nav-number">9.</span> <span class="nav-text">Web Components</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Custom-HTML-elem"><span class="nav-number">9.1.</span> <span class="nav-text">Custom HTML elem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadow-DOM"><span class="nav-number">9.2.</span> <span class="nav-text">Shadow DOM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Template-elem"><span class="nav-number">10.</span> <span class="nav-text">Template elem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">11.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">12.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM"><span class="nav-number">13.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Module"><span class="nav-number">14.</span> <span class="nav-text">Module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">15.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Chan"
+      src="/blog/images/apple-touch-icon-next.png">
+  <p class="site-author-name" itemprop="name">Stephen Chan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stephenchan255" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;stephenchan255" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/stephen-chan255/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;stephen-chan255&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stephen.chan255@hotmail.com" title="E-Mail → mailto:stephen.chan255@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stephenchan255.github.io/portfolio/" title="Portfolio → https:&#x2F;&#x2F;stephenchan255.github.io&#x2F;portfolio&#x2F;"><i class="fa fa-globe fa-fw"></i>Portfolio</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://youtube.com/" title="http:&#x2F;&#x2F;youtube.com" rel="noopener" target="_blank">Youtube</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/stephenchan255" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://stephenchan255.github.io/blog/2020/10/22/js-miscellaneous/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/apple-touch-icon-next.png">
+      <meta itemprop="name" content="Stephen Chan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stephen's notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript miscellaneous
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-22 19:08:31" itemprop="dateCreated datePublished" datetime="2020-10-22T19:08:31+08:00">2020-10-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-09-06 00:20:05" itemprop="dateModified" datetime="2021-09-06T00:20:05+08:00">2021-09-06</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Chrome-console-amp-Debugging"><a href="#Chrome-console-amp-Debugging" class="headerlink" title="Chrome console &amp; Debugging"></a>Chrome console &amp; Debugging</h1><p>Chrome console <a target="_blank" rel="noopener" href="https://javascript.info/devtools#google-chrome">..</a> &amp; debuging in chrome <a target="_blank" rel="noopener" href="https://javascript.info/debugging-chrome">..</a></p>
+<ul>
+<li>logging with <code>console.log(...)</code></li>
+<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd, execution tracking …</li>
+</ul>
+<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5</p>
+<ul>
+<li>off by default — always put <code>&#39;use script&#39;</code> on <strong>top</strong> of script/fn-body<ul>
+<li>auto enable for <code>class</code> &amp; <code>module</code></li>
+<li>no way to cancel once enter strict mode</li>
+</ul>
+</li>
+<li>non-strict: assignment to non-existing var (without declear) ==&gt; create a new global var (for compatibility) <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h1><ul>
+<li><code>Object</code> key: str/symbol (keyed values collection)</li>
+<li><code>Array</code> key: int (ordered collection, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
+<li><code>Map</code> key: any type</li>
+<li><code>Set</code>: unique values</li>
+</ul>
+<h2 id="Date-amp-time"><a href="#Date-amp-time" class="headerlink" title="Date &amp; time"></a>Date &amp; time</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/date#creation">creation</a> &amp; <code>Date.parse(str)</code> <a target="_blank" rel="noopener" href="https://javascript.info/date#date-parse-from-a-string">..</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/date#access-date-components">get/set date components</a>: <code>get/set*()</code>, <a target="_blank" rel="noopener" href="https://javascript.info/date#autocorrection">auto-correction</a></li>
+<li>work on timestamp<ul>
+<li><code>Date.now()</code>: get timestamp without intermediate Date obj</li>
+<li><code>date.getTime()</code>: faster than auto-date-to-num-convert (by +/-) <a target="_blank" rel="noopener" href="https://javascript.info/date#benchmarking">..</a></li>
+<li>more precise time measure <a target="_blank" rel="noopener" href="https://javascript.info/date#summary">..</a></li>
+</ul>
+</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/date#show-a-weekday">Show a weekday</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/date#european-weekday">European weekday</a>, <a target="_blank" rel="noopener" href="https://javascript.info/date#which-day-of-month-was-many-days-ago">getDateAgo(date, days)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/date#last-day-of-month">getLastDayOfMonth(year, month)</a></li>
+</ul>
+<h2 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h2><p><code>Map</code>: obj with key of any type, key compare: <code>===</code> &amp; <code>NaN === NaN</code></p>
+<ul>
+<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map: <code>new Map(Object.entries(obj))</code> <a target="_blank" rel="noopener" href="https://javascript.info/map-set#object-entries-map-from-object">..</a> &amp; <code>Object.fromEntries(map)</code> <a target="_blank" rel="noopener" href="https://javascript.info/map-set#object-fromentries-object-from-map">..</a></li>
+<li>iter: <code>forEach(..)</code>, <code>keys/values/entries()</code> <a target="_blank" rel="noopener" href="https://javascript.info/map-set#iteration-over-map">..</a></li>
+</ul>
+<p><code>Set</code>: unique values</p>
+<ul>
+<li>methods similar to map, get/set() =&gt; add(), iter by insertion order <a target="_blank" rel="noopener" href="https://javascript.info/map-set#summary">..</a></li>
+<li>Filter unique array members: <code>Array.from(new Set(arr))</code><a target="_blank" rel="noopener" href="https://javascript.info/map-set#filter-unique-array-members">..</a></li>
+</ul>
+<p><code>WeakMap</code>/<code>WeakSet</code>: obj unreachable by other means -&gt; rmed from memory &amp; WM/WS</p>
+<ul>
+<li>only <strong>obj</strong> as key/items in WM/WS</li>
+<li>methods <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#weakmap">..</a> </li>
+<li>WeakMap use cases: <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#use-case-additional-data">additional data</a>, <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#use-case-caching">caching</a></li>
+</ul>
+<h1 id="Obj-advanced"><a href="#Obj-advanced" class="headerlink" title="Obj advanced"></a>Obj advanced</h1><h2 id="Symbol-type"><a href="#Symbol-type" class="headerlink" title="Symbol type"></a>Symbol type</h2><p>unique (even same desc) vs global symbol (1 key 1 symbol)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Obj-prop-config"><a href="#Obj-prop-config" class="headerlink" title="Obj prop config"></a>Obj prop config</h2><p>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors">..</a></p>
+<ul>
+<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code> &amp; clone with desc <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors#object-getownpropertydescriptors">..</a></li>
+<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
+<li>built-in <code>toString()</code> non-enumerable</li>
+<li>Sealing an object globally …</li>
+</ul>
+<p>Accessor <code>get/set xxx([value]) &#123;..&#125;</code>, trigger when <code>xxx</code> prop read/assign</p>
+<ul>
+<li>desc: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
+<li>smarter g/setter: store value in another internal prop</li>
+<li>age -&gt; birthday example <a target="_blank" rel="noopener" href="https://javascript.info/property-accessors#using-for-compatibility">..</a></li>
+</ul>
+<h2 id="Key-iter"><a href="#Key-iter" class="headerlink" title="Key iter"></a>Key iter</h2><ul>
+<li>method differs (all return an arr) <a target="_blank" rel="noopener" href="https://javascript.info/prototype-methods#summary">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/proxy#iteration-with-ownkeys-and-getownpropertydescriptor">..</a><ul>
+<li><code>Reflect.ownKeys(obj)</code>/<code>obj.hasOwnProperty(key)</code>: own</li>
+<li><code>Object.getOwnPropertyNames</code>: own, non-symbol — <code>Object.getOwnPropertySymbols(obj)</code>: own, symbol</li>
+<li><code>Object.keys/values/entries(obj)</code>: own, <strong>non-symbol</strong> &amp; <code>enum</code></li>
+<li><code>for..in</code>: own + <strong>proto</strong>, <strong>non-symbol</strong> &amp; <code>enum</code></li>
+<li><code>Object.assign()</code>: symbol + non-symbol <a target="_blank" rel="noopener" href="https://javascript.info/symbol#symbols-are-skipped-by-for-in">..</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Global-obj"><a href="#Global-obj" class="headerlink" title="Global obj"></a>Global obj</h2><p>Provide built-in var &amp; fn (can be access directly), e.g. <code>window</code> in browser &amp; <code>global</code> in node </p>
+<ul>
+<li>e.g. <code>window.alert</code>, <code>window.innerHeight</code> &amp; global fn || <strong>var</strong>-var</li>
+<li>make value global: <code>window.xxx = ...</code> (props of global-obj)</li>
+</ul>
+<h2 id="Primitive-as-Obj"><a href="#Primitive-as-Obj" class="headerlink" title="Primitive as Obj"></a>Primitive as Obj</h2><p>provide methods to op prim but keep them fast &amp; lightweight e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> </p>
+<ul>
+<li>temporary wrapper obj created &amp; destroyed <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> — manually modify obj wrap =&gt; err (strict) || undefined <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
+</ul>
+<h2 id="Obj-to-primitive"><a href="#Obj-to-primitive" class="headerlink" title="Obj to primitive"></a>Obj to primitive</h2><ul>
+<li><a href="" title="which type to convert">3 hints</a>: <code>&quot;string&quot;</code>, <code>&quot;number&quot;</code> &amp; <code>&quot;default&quot;</code> (no boolean hint: all <strong>obj  =&gt; true</strong>)</li>
+<li>3 methods: must return a prim value <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#return-types">..</a><ul>
+<li><code>[Symbol.toPrimitive](hint)</code> return obj ==&gt; err</li>
+<li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="JS-engine-internal-Event-loop"><a href="#JS-engine-internal-Event-loop" class="headerlink" title="JS engine internal: Event loop"></a>JS engine internal: Event loop</h1><p><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current rgl sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
+<ul>
+<li>tasks come while engine busy — enqueued to the queue</li>
+<li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
+<li>enqueue a macrotask:  <code>setTimeout(f)</code></li>
+<li>use case: <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-1-splitting-cpu-hungry-tasks">split CUP-heavy task by setTimeout</a> =&gt; react other tasks in-btn / <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-2-progress-indication">progress indication</a> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">…</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue">Microtask queue</a> (aka <code>PromiseJobs</code> queue): handle async promise handlers in <code>.then/catch/finally</code> &amp; <code>await</code></p>
+<ul>
+<li>handler enqueued when promise settled, run af current code &amp; prev micro finished <a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue#microtasks-queue">..</a></li>
+<li>global <code>unhandledrejection</code> event: triggered when microtask queue completed but exist “rejected” promise</li>
+<li>make code exe af <code>.then/catch/finally</code>: chained by <code>.then()</code></li>
+<li>enqueue a microtask — <code>queueMicrotask(f)</code> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#macrotasks-and-microtasks">..</a></li>
+</ul>
+<p>JS exe-flow based on <em>event loop</em>: engine sleep until tasks appear, then exe from the oldest one (FIFO) <a target="_blank" rel="noopener" href="https://javascript.info/event-loop">..</a></p>
+<ul>
+<li>exe process (no macrotask in-btw microtask — ensure app-env same) <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">..</a><ol>
+<li><strong>current rgl sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
+<li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
+<li><strong>another macrotask</strong> </li>
+<li>…</li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
+</ul>
+<h1 id="Popup-win-amp-iframe"><a href="#Popup-win-amp-iframe" class="headerlink" title="Popup win &amp; iframe"></a>Popup win &amp; iframe</h1><p><a target="_blank" rel="noopener" href="https://javascript.info/popup-windows" title="a sep win with own JS env, safe to open un-trusted 3rd-party site">Popup win</a>: <code>window.open(URL, ..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#window-open">..</a> — open a new tab (by default) in browser (or win if sizes provided <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#summary">..</a>)</p>
+<ul>
+<li>win &lt;-&gt; popup: <code>let popupWin = window.open(..);</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#accessing-popup-from-window">..</a>, <code>popupWin.opener</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#accessing-window-from-popup">..</a></li>
+<li>close popup: <code>win.close()</code> &amp; <code>win.closed</code> (status check) <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#closing-a-popup">..</a></li>
+<li>win focus/blur: <code>win.focus/blur()</code> &amp; <code>win.onfocus/onblur</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#focus-blur-on-a-window">..</a></li>
+<li>win scrolling &amp; resizing <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#scrolling-and-resizing">…</a></li>
+</ul>
+<p><a href="ttps://javascript.info/cross-window-communication#in-action-iframe" title="a sep embeded win with own sep `document` and `window` obj">Embedded win</a>: <code>&lt;iframe ..&gt;</code> — <code>iframe.contentWindow/contentDocument</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#in-action-iframe">..</a></p>
+<ul>
+<li>wrong doc pitfall: <code>iframe.contentDocument</code> when <code>iframe.onload</code> (wrong for the one immediately af iframe created) <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
+<li><code>window.frames</code> (named coll) &amp; win hierarchy (iframe contains iframes) — check whether iframe by <code>win === top</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#collection-window-frames">..</a> </li>
+<li>iframe <code>sandbox</code> attr (exclude certain actions inside iframe) <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#the-sandbox-iframe-attribute">…</a></li>
+<li>transparent iframe &amp; clickjacking attack (intercept a single click <a target="_blank" rel="noopener" href="https://javascript.info/clickjacking#summary">..</a>) <a target="_blank" rel="noopener" href="https://javascript.info/clickjacking">…</a></li>
+</ul>
+<h1 id="Bin-data-files"><a href="#Bin-data-files" class="headerlink" title="Bin data, files"></a>Bin data, files</h1><p>meet binary data: files/img (create, upload, download) <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays">..</a></p>
+<h2 id="BufferSource"><a href="#BufferSource" class="headerlink" title="BufferSource"></a>BufferSource</h2><ul>
+<li><code>ArrayBuffer(byteLength)</code>: store raw bin data (byte-seq) — read data by 2 kinds <code>ArrayBufferView</code> <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#summary">..</a><ul>
+<li>mtp typed arrays <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#typedarray">…</a>: choose data format at constructor, e.g. Uint8Array <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#dataview">..</a>  — “out-of-bounds” problem <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#out-of-bounds-behavior">..</a> &amp; methods ??? <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#typedarray-methods">…</a>, task: <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#concatenate-typed-arrays">Concat typed arrays</a></li>
+<li><code>DataView</code>: choose data format at method, e.g. <code>dataView.get/setUnit8(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#dataview">…</a></li>
+</ul>
+</li>
+<li><code>BufferSource</code>: ArrayBuffer + ArrayBufferView <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#summary">..</a></li>
+<li>str &lt;=&gt; bytes: <code>textEncoder.encode(str)</code> (utf-8) &amp; <code>new TextDecoder(encoding, ..).decode(BufferSource, ..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/text-decoder">..</a></li>
+</ul>
+<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p><code>Blob</code> bin data type <a target="_blank" rel="noopener" href="https://javascript.info/blob">…</a>: file up/download op &amp; web network request <a target="_blank" rel="noopener" href="https://javascript.info/blob#summary">..</a></p>
+<ul>
+<li>Blob type <code>&#39;text/html | text/plain&#39;</code> → <code>Content-Type</code> in network requests </li>
+<li>Blob → URL (for <code>&lt;a&gt;/&lt;img&gt;</code>) <a target="_blank" rel="noopener" href="https://javascript.info/blob#blob-as-url">…</a><br>  <code>&lt;a download=&quot;hello.txt&quot;&gt;</code>, <code>a.href = URL.createObjectURL(blob)</code><br>  <code>a.click()</code>, <code>URL.revokeObjectURL(a.href)</code></li>
+<li>img → Blob (via <code>&lt;convas&gt;</code>) <a target="_blank" rel="noopener" href="https://javascript.info/blob#image-to-blob">…</a></li>
+</ul>
+<h2 id="File-amp-FileReader"><a href="#File-amp-FileReader" class="headerlink" title="File &amp; FileReader"></a>File &amp; FileReader</h2><ul>
+<li><code>File</code>: inherit from <code>Blob</code>, get from <code>input.files[0]</code> &amp; Drag’n’Drop events <a target="_blank" rel="noopener" href="https://javascript.info/file">..</a></li>
+<li><code>FileReader</code>: read data from <code>Blob</code> via <code>fr.readAs*(blob)</code> (async), <code>load/error</code> events &amp; <code>fr.result / error</code> <a target="_blank" rel="noopener" href="https://javascript.info/file#filereader">..</a></li>
+<li>sent file over network: <code>Fetch</code>/ <code>XHR</code> <a target="_blank" rel="noopener" href="https://javascript.info/file#summary">..</a></li>
+</ul>
+<h1 id="URL-object"><a href="#URL-object" class="headerlink" title="URL object"></a>URL object</h1><ul>
+<li><code>new URL(url: str, [base])</code>, url components, char encoding <a target="_blank" rel="noopener" href="https://javascript.info/url">…</a></li>
+</ul>
+<h1 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h1><h2 id="Custom-HTML-elem"><a href="#Custom-HTML-elem" class="headerlink" title="Custom HTML elem"></a>Custom HTML elem</h2><ul>
+<li><strong>all-new</strong>: extends <code>HTMLElement</code> <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements">..</a> (no semantics <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements#customized-built-in-elements">..</a>)<ul>
+<li>2-step creation: JS class + <code>customElements.define(tag, js-class)</code> <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements">…</a></li>
+<li><code>&lt;time-formatted&gt;</code> &amp; <code>Intl.DateTimeFormat(..)</code> demo …</li>
+</ul>
+</li>
+<li><strong>customized</strong>: extends built-in elem (with semantics) — 3-step creation (<code>&lt;button is=&quot;my-button&quot;&gt;</code>) <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements#customized-built-in-elements">…</a></li>
+<li>html tag <code>&lt;my-element&gt;</code> / <code>document.createElement(..)</code>: create instance of <code>MyElement</code> <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements">..</a></li>
+<li>CSS selector <code>:not(:defined)</code>: style “undefined” elems, e.g. custom html-tag bf <code>customElements.define(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements#example-time-formatted">..</a></li>
+<li>HTML parser process parent bf child <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements#rendering-order">…</a><ul>
+<li>access childElem by <code>setTimeout(..)</code> (af html parsing completed)</li>
+<li>want outer callback trigger af inner elem ready: inner elem dispatch events &amp; outer listen</li>
+</ul>
+</li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/custom-elements#live-timer-element">Live timer elem</a></li>
+</ul>
+<h2 id="Shadow-DOM"><a href="#Shadow-DOM" class="headerlink" title="Shadow DOM"></a>Shadow DOM</h2><ul>
+<li>Shadow tree (for encapsulation: own id/quary spaces, styling <a target="_blank" rel="noopener" href="https://javascript.info/shadow-dom#encapsulation">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/shadow-dom#summary">..</a>) vs Light tree <a target="_blank" rel="noopener" href="https://javascript.info/shadow-dom#shadow-tree">…</a><ul>
+<li>create by <code>elem.attachShadow(..)</code> =&gt; shadow root: <code>elem.shadowRoot</code> <ul>
+<li><code>elem.shadowRoot.host</code>: the elem, shadow tree host <a target="_blank" rel="noopener" href="https://javascript.info/shadow-dom#shadow-tree">…</a></li>
+<li>shadow root like elem (<code>innerHTML</code> | DOM methods appliable), but cannot have event handler (use its 1st child) <a target="_blank" rel="noopener" href="https://javascript.info/slots-composition#updating-slots">..</a>    </li>
+</ul>
+</li>
+<li>if elem has both -&gt; only render shadow — compose by <strong>slot</strong> <a target="_blank" rel="noopener" href="https://javascript.info/slots-composition">…</a><ul>
+<li><code>&lt;slot name=&quot;...&quot;&gt;</code> (shadow) &amp; elem with <code>slot=&quot;...&quot;</code> (light, render as child elem of <code>&lt;slot&gt;</code>)</li>
+<li><code>slotchange</code> event (when slotted-elems add/rm/replace) <a target="_blank" rel="noopener" href="https://javascript.info/slots-composition#updating-slots">…</a>, <a target="_blank" rel="noopener" href="https://javascript.info/slots-composition#summary">..</a> &amp; slot-related methods <a target="_blank" rel="noopener" href="https://javascript.info/slots-composition#slot-api">…</a></li>
+<li>open/close menu example <a target="_blank" rel="noopener" href="https://javascript.info/slots-composition#menu-example">…</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>styling</strong>: <code>:host*</code>, <code>::slotted</code>, components custom CSS props <a target="_blank" rel="noopener" href="https://javascript.info/shadow-dom-style">…</a> &amp; <code>pseudo</code> attr <a target="_blank" rel="noopener" href="https://javascript.info/shadow-dom#built-in-shadow-dom">..</a></li>
+<li><strong>event handling</strong>: event happen in shadow DOM <strong>hidden to outside</strong> — retarget (bubble) to its <strong>host</strong> elem <a target="_blank" rel="noopener" href="https://javascript.info/shadow-dom-events">..</a><ul>
+<li>evebt bubbling: <code>e.composedPath()</code>, <code>e.composed</code> (true for bubble across shadow DOM boundary) …</li>
+</ul>
+</li>
+</ul>
+<h1 id="Template-elem"><a href="#Template-elem" class="headerlink" title="Template elem"></a>Template elem</h1><p><code>&lt;template&gt;</code> tag: for HTML markup storage (any syntax-valid HTML), content ignored by browser <a target="_blank" rel="noopener" href="https://javascript.info/template-element">..</a></p>
+<ul>
+<li>elems not render, style/script not work, until <code>tmpl.content</code>: <code>DocumentFragment</code> <a target="_blank" rel="noopener" href="https://javascript.info/template-element#inserting-template">..</a> inserted to doc</li>
+</ul>
+<h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>Regualr fn retur 1 value ==&gt; Generators “yield” mtp values 1-by-1 (allow create data stream)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generateSequence</span>(<span class="params"></span>) </span>&#123;    <span class="comment">// generator function</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;                        <span class="comment">// no value af &#x27;yield&#x27; means &#x27;undefined&#x27;</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = generateSequence(); <span class="comment">// when called, return a Generator instead of run the fn </span></span><br><span class="line">alert(generator);                   <span class="comment">// [object Generator]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// call generator.next() to get result</span></span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;  </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">2</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125; </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">3</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;              <span class="comment">// done:true for &quot;return&quot;</span></span><br><span class="line">&#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;                        <span class="comment">// no more value af &#x27;return&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>when called, it return a <strong>Generator</strong> (an Iterator with <strong>next()</strong> method) to manage the fn-exe</li>
+<li><code>gen.next()</code> — run fn-exe until <code>yield &lt;value&gt;</code> stmt &amp; return <code>&#123;value: &lt;value&gt;, done: true/false&#125;</code><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/generators#using-generators-for-iterables">use generator to create iter-obj</a></li>
+<li>can use <code>gen</code> in <code>for..of</code> loop &amp; sperad syntax to get yield values (exc returned value)</li>
+</ul>
+</li>
+<li>pass data back to gen.yield<ul>
+<li><code>gen.next(arg)</code> — pass <code>arg</code> as the value of <strong>current yield</strong> &amp; return the resulting-obj of <strong>next yield</strong> <a target="_blank" rel="noopener" href="https://javascript.info/generators#yield-is-a-two-way-street">..</a></li>
+<li><code>gen.throw(err)</code> — throw err as the result of <strong>current yield</strong> (err not catched in gen() will fall out to <code>gen.throw</code>)</li>
+</ul>
+</li>
+<li><strong>Generator composition</strong> — embed gen-values into another gen-fn by <code>yield* gen(...)</code> </li>
+<li>Task:  <a target="_blank" rel="noopener" href="https://javascript.info/generators#pseudo-random-generator">pseudoRandom(seed)</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#async-iterables">Async iteratable</a> <code>async *[Symbol.asyncIterator]()</code></p>
+<ul>
+<li><code>async function*</code> for <a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#async-generators">async gen</a> — yield value asyncly &amp; <code>await gen.next()</code></li>
+<li><code>[Symbol.asyncIterator]()</code> for <a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#async-iterators">async iterator</a> — iter over data that comes asyncly (e.g. paginated data) &amp; use in <code>for await ..of</code> loop</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#real-life-example">the <code>async function* fetchCommits(repo)</code> example</a></li>
+</ul>
+<h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><p><strong>Fn decorator</strong> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators">..</a></p>
+<ul>
+<li>fn-wrapper that takes fn as param (callback) and alters its behavior</li>
+<li>decorated fn lose prop — <code>Proxy</code> ( forward eth to target) <a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxy-apply">..</a></li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#spy-decorator">spy(fn)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">delay(fn)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#debounce-decorator">debounce(fn, ms)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#throttle-decorator">throttle(fn, ms)</a></li>
+</ul>
+<p><strong>Currying</strong></p>
+<ul>
+<li>transform <code>f(a, b, c)</code> → <code>f(a)(b)(c)</code> — easily for partial (see below): let fn = f(a), then fn(b)(c) <a target="_blank" rel="noopener" href="https://javascript.info/currying-partials#currying-what-for">..</a></li>
+<li>implementation <a target="_blank" rel="noopener" href="https://javascript.info/currying-partials#advanced-curry-implementation">..</a></li>
+</ul>
+<p><strong>Proxy &amp; Reflect</strong><br><code>Proxy</code>: a wrapper obj that intercepts ops (e.g. get/set props) on the target-obj by its handler (obj with traps) <a target="_blank" rel="noopener" href="https://javascript.info/proxy">..</a></p>
+<ul>
+<li>ops on <code>proxy</code> =&gt; trigger crp trap =&gt; (if no) forwards ops to <code>target</code> <a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxy">..</a> </li>
+<li>proxy no own props, access from <code>target</code> <a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxy">..</a></li>
+<li>ops -&gt; proxy handler methods -&gt; internal methods (low level)</li>
+<li>Proxying a getter with <code>receiver</code> by <code>Reflect.get(target, prop, receiver);</code>: pass <code>receiver</code> (correct obj) as <code>this</code> in getter <a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxying-a-getter">…</a></li>
+</ul>
+<p><code>Reflect</code>: to complement Proxy <a target="_blank" rel="noopener" href="https://javascript.info/proxy#reflect">…</a></p>
+<p>Tasks: <a target="_blank" rel="noopener" href="https://javascript.info/proxy#accessing-array-1">array[-1]</a>, <a target="_blank" rel="noopener" href="https://javascript.info/proxy#observable">makeObservable(target)</a></p>
+<p><strong>Recursion</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion">..</a></p>
+<ul>
+<li><strong>base</strong> (get result without nest calls) &amp; <strong>recursive step</strong><ul>
+<li><a href="" title="store info about the exe of currently running fn">execution context and stack</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#two-ways-of-thinking" title="max # of nested fn calls, inc 1st one (i.e. max # of context in the stack), limited by JS engine">recursion depth</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one" title="recur-call in last line (most JS engine not support)">tail call optimization</a></li>
+</ul>
+</li>
+<li><strong>recursive vs iterative</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion#the-exit">..</a><ul>
+<li>recursive: <a href="" title="nested calls and execution stack management [taks1]">take resrcs</a> but <a href="" title="`shorter` &amp; more understndable">simpler code</a></li>
+<li>iterative: <a target="_blank" rel="noopener" href="https://javascript.info/recursion#the-exit" title="single context, changing var in the process, small fixed memory usage">memory-saving</a></li>
+</ul>
+</li>
+<li>recursive structure &amp; linked list: <code>node = &#123;value, next -&gt; node2 / null&#125;</code> </li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/recursion#fibonacci-numbers">Fib numbers</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a> </li>
+</ul>
+<h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><ul>
+<li>range &amp; selection <a target="_blank" rel="noopener" href="https://javascript.info/selection-range">..</a></li>
+<li>mutation observer: fire callback when change observed on a DOM node, childList &amp; subtree, attributes, text content <a target="_blank" rel="noopener" href="https://javascript.info/mutation-observer">..</a><ul>
+<li>div <code>contentEditable</code> attr</li>
+</ul>
+</li>
+</ul>
+<h1 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h1><ul>
+<li>a script file that load each other by <code>export</code> &amp; <code>import</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#what-is-a-module">..</a>, intro in ES6 <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro">..</a></li>
+</ul>
+<p><strong>module in browser</strong>: <code>&lt;script type=&quot;module&quot;&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#what-is-a-module">..</a></p>
+<ul>
+<li><code>type</code> attr enable <code>import/export</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#build-tools">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#summary">..</a> — the old “nomodule” attr <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#compatibility-nomodule">..</a></li>
+<li>module <code>defer</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a> by default <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#summary">..</a>, can <code>async</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> (work for both <strong>inline</strong>/external scripts <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a>) </li>
+</ul>
+<p><code>export/import</code> <strong>syntax</strong> <a target="_blank" rel="noopener" href="https://javascript.info/import-export#summary">..</a></p>
+<ul>
+<li>default export (import without <code>&#123;&#125;</code>) vs named export <a target="_blank" rel="noopener" href="https://javascript.info/import-export#export-default">..</a></li>
+<li><code>default</code> keyword for default export <a target="_blank" rel="noopener" href="https://javascript.info/import-export#the-default-name">…</a> (when import, any name works — naming consistency: crp to file name <a target="_blank" rel="noopener" href="https://javascript.info/import-export#a-word-against-default-exports">..</a>)</li>
+<li><code>as</code> for export/import renaming</li>
+<li>Re-export: <code>export .. from ..</code> (import &amp; export): single entry point of fnality (mtp re-export stmt in 1 file) <a target="_blank" rel="noopener" href="https://javascript.info/import-export#re-export">..</a></li>
+<li><code>import &quot;module&quot;</code>: run module code without assign to var </li>
+</ul>
+<p><strong>dynamic imports</strong> <code>import(&lt;module-path&gt;)</code>: return a <strong>promise</strong> resolves into a module-obj with exports (as keys) <a target="_blank" rel="noopener" href="https://javascript.info/modules-dynamic-imports">..</a></p>
+<ul>
+<li>a special syntax, not a fn (like super(), cannot copy &amp; use <strong>call/apply</strong>)</li>
+<li>work with rgl <code>&lt;script&gt;</code> tag (no need type=”module”)</li>
+</ul>
+<p><strong>module vs rgl script</strong> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#core-module-features">..</a></p>
+<ul>
+<li>auto strict (<code>this == undefined</code>)</li>
+<li>own scope (interchange fnality via <code>import/export</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#summary">..</a>)</li>
+<li>exe only once &amp; export share when imported mtp times (use as init) </li>
+</ul>
+<p><strong>others</strong></p>
+<ul>
+<li>place of <code>import/export</code> stms not matter (script top or bottom), but not work inside “{…}” — dynamic imports <a target="_blank" rel="noopener" href="https://javascript.info/import-export#summary">..</a></li>
+<li><code>import.meta</code>: obj contains info about the current module <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#import-meta">..</a></li>
+<li>build tool (for deployment) e.g. <strong>webpack</strong> (bundle modules together &amp; tree-shaking) <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#build-tools">..</a><ul>
+<li>resulting “bundled” script <code>bundle.js</code> no <code>import/export</code> stmt ==&gt; no <code>type=module</code> required (rgl script <code>src=&quot;bundle.js&quot;</code>) <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#build-tools">..</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Other-concepts-amp-Resources"><a href="#Other-concepts-amp-Resources" class="headerlink" title="Other concepts &amp; Resources"></a>Other concepts &amp; Resources</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/coding-style">code style &amp; linter</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/testing-mocha">Auto-testing lib &amp; BDD</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/manuals-specifications">Manuals &amp; specs</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/polyfills">Polyfill &amp; Babel</a> <ul>
+<li>JS keep evolving &amp; some features may not implemented in all engines</li>
+<li><a target="_blank" rel="noopener" href="https://babeljs.io/">Babel</a>: transpiler (new syntax constructs) +  polyfill (updates/adds new fns)</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/intro#languages-over-javascript">Langs “over” JS</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/IT/" rel="tag"># IT</a>
+              <a href="/blog/tags/Programming/" rel="tag"># Programming</a>
+              <a href="/blog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2020/10/20/js-async/" rel="prev" title="Async programming & network request in JavaScript">
+                  <i class="fa fa-chevron-left"></i> Async programming & network request in JavaScript
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2021/09/06/hello-world/" rel="next" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Chan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

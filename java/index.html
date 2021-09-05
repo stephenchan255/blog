@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;stephenchan255.github.io&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;blog&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:-1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="Java IntroWrite Once Run Anywhere write once: Java src code (.java file) &#x3D;&#x3D;&gt; Javac (complier) () &#x3D;&#x3D;&gt; bytecode (.class file) run anywhere: byte code &#x3D;&#x3D;&gt; JVM (interpret) &#x3D;&#x3D;&gt; machine code (bi">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Java Basics">
+<meta property="og:url" content="https://stephenchan255.github.io/blog/java/index.html">
+<meta property="og:site_name" content="Stephen&#39;s notes">
+<meta property="og:description" content="Java IntroWrite Once Run Anywhere write once: Java src code (.java file) &#x3D;&#x3D;&gt; Javac (complier) () &#x3D;&#x3D;&gt; bytecode (.class file) run anywhere: byte code &#x3D;&#x3D;&gt; JVM (interpret) &#x3D;&#x3D;&gt; machine code (bi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-04T12:23:20.000Z">
+<meta property="article:modified_time" content="2021-09-05T16:20:05.359Z">
+<meta property="article:author" content="Stephen Chan">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://stephenchan255.github.io/blog/java/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;stephenchan255.github.io&#x2F;blog&#x2F;java&#x2F;index.html&quot;,&quot;path&quot;:&quot;java&#x2F;index.html&quot;,&quot;title&quot;:&quot;Java Basics&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Java Basics | Stephen's notes
+</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Stephen's notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Contents keep updating ...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-compoter-science"><a href="/blog/computer_science/" rel="section"><i class="fa fa-desktop fa-fw"></i>Compoter Science</a></li>
+        <li class="menu-item menu-item-programming"><a href="/blog/programming/" rel="section"><i class="fa fa-code fa-fw"></i>Programming</a></li>
+        <li class="menu-item menu-item-java"><a href="/blog/java/" rel="section"><i class="fab fa-java fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-javascript"><a href="/blog/categories/IT/Programming/JavaScript/" rel="section"><i class="fab fa-js fa-fw"></i>JavaScript</a></li>
+        <li class="menu-item menu-item-cpp"><a href="/blog/cpp/" rel="section"><i class="fab fa-cuttlefish fa-fw"></i>Cpp</a></li>
+        <li class="menu-item menu-item-config"><a href="/blog/config/" rel="section"><i class="fa fa-cog fa-fw"></i>Config</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">5</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Intro"><span class="nav-number">1.</span> <span class="nav-text">Java Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-Once-Run-Anywhere"><span class="nav-number">1.1.</span> <span class="nav-text">Write Once Run Anywhere</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-versions-p2"><span class="nav-number">1.2.</span> <span class="nav-text">3 versions [p2]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration"><span class="nav-number">1.3.</span> <span class="nav-text">Configuration</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-primitive-types"><span class="nav-number">2.</span> <span class="nav-text">8 primitive types</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array"><span class="nav-number">3.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String"><span class="nav-number">4.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object-oriented"><span class="nav-number">5.</span> <span class="nav-text">Object oriented</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Concurency-amp-Multi-thread"><span class="nav-number">6.</span> <span class="nav-text">Concurency &amp; Multi-thread</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Internet-Communication"><span class="nav-number">7.</span> <span class="nav-text">Internet Communication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC-API-amp-DB-Access"><span class="nav-number">8.</span> <span class="nav-text">JDBC API &amp; DB Access</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">8.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Programming-process"><span class="nav-number">8.2.</span> <span class="nav-text">Programming process</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Refs"><span class="nav-number">9.</span> <span class="nav-text">Refs</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Chan"
+      src="/blog/images/apple-touch-icon-next.png">
+  <p class="site-author-name" itemprop="name">Stephen Chan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stephenchan255" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;stephenchan255" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/stephen-chan255/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;stephen-chan255&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stephen.chan255@hotmail.com" title="E-Mail → mailto:stephen.chan255@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stephenchan255.github.io/portfolio/" title="Portfolio → https:&#x2F;&#x2F;stephenchan255.github.io&#x2F;portfolio&#x2F;"><i class="fa fa-globe fa-fw"></i>Portfolio</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://youtube.com/" title="http:&#x2F;&#x2F;youtube.com" rel="noopener" target="_blank">Youtube</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/stephenchan255" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner page posts-expand">
+  
+  
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Java Basics
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      <div class="post-body">
+          <h1 id="Java-Intro"><a href="#Java-Intro" class="headerlink" title="Java Intro"></a>Java Intro</h1><h2 id="Write-Once-Run-Anywhere"><a href="#Write-Once-Run-Anywhere" class="headerlink" title="Write Once Run Anywhere"></a>Write Once Run Anywhere</h2><ul>
+<li>write once: <code>Java src code</code> (.java file) ==&gt; <strong>Javac</strong> (complier) () ==&gt; <code>bytecode</code> (.class file)</li>
+<li>run anywhere: <code>byte code</code> ==&gt; <strong>JVM</strong> (interpret) ==&gt; <code>machine code</code> (binary file) ==&gt; <strong>device</strong> (execute)</li>
+<li>compile once, copy bytecode to any platform having JVM to execute</li>
+</ul>
+<h2 id="3-versions-p2"><a href="#3-versions-p2" class="headerlink" title="3 versions [p2]"></a>3 versions [p2]</h2><table>
+<thead>
+<tr>
+<th>Edition</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java SE (Standard)</td>
+<td>main for desktop app, inc Java lang fundation, JDBC, nework, thread</td>
+</tr>
+<tr>
+<td>Java EE (Enterprise)</td>
+<td>main for distributed network, core as EJB</td>
+</tr>
+<tr>
+<td>Java ME (Embeded)</td>
+<td>embeded system, e.g. pad，phone</td>
+</tr>
+</tbody></table>
+<h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>搭建Java Env: 安装JDK &amp; JRE，set env_vars</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JDK</td>
+<td>Java SE Development Kit, inc compiler (javac), debuger, app launcher, + JDK src code [p7]</td>
+</tr>
+<tr>
+<td>JRE</td>
+<td>run Java program [p7], inc <strong>JVM</strong> &amp; GC</td>
+</tr>
+<tr>
+<td>JVM</td>
+<td>interpret bytecode to machine code bf each exe (call <code>main()</code>)</td>
+</tr>
+</tbody></table>
+<h1 id="8-primitive-types"><a href="#8-primitive-types" class="headerlink" title="8 primitive types"></a>8 primitive types</h1><ul>
+<li><code>byte</code>, <code>short</code>, <code>int</code> (default), <code>long</code> (L); </li>
+<li><code>float</code> (F/f) &amp; <code>double</code>; </li>
+<li><code>char</code>(Unicode char &amp; escape seq), <code>boolean</code></li>
+</ul>
+<div class="note info no-icon"><ul>
+<li>integer literal : 2进制 <code>0b</code>, 8进制 <code>0</code> [p28], 16进制 <code>0x</code></li>
+<li>integer ovreflow: <code>(byte) 129</code> -&gt; -127</li>
+<li><code>(integer) float / double</code> || <code>integer / integer</code> ==&gt; decimal part truncat, -1.2f -&gt; -1, 3/2 = 1<ul>
+<li>want float result in integer devision =&gt; casting至少其中一个为float</li>
+</ul>
+</li>
+<li>local var no default value </li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html">ref</a></li>
+</ul>
+</div>
+
+<h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><p>2-dim array <code>int[][] tdarr = new int[a][b]</code></p>
+<ul>
+<li>a: tdarr.length (行); b: tdarr[i].length (列), can be spec later by <code>tdarr[0] = new int[2]</code></li>
+</ul>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><p>Impl by <code>char[]</code>, strVar -&gt; obj (in heap) -&gt; literal (in stack)</p>
+<table>
+<thead>
+<tr>
+<th>Declaration Syntax</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;..&quot;</code> (char-str)</td>
+<td>ref share if literal exist in stack</td>
+</tr>
+<tr>
+<td><code>new String(&quot;..&quot;)</code> || <code>expr</code></td>
+<td>ref not share (always new a obj in heap)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Check str empty: check <code>null</code> by <code>==</code>, check <code>&quot;&quot;</code> by <code>equals()</code> (Object.equals(): check by <code>==</code>)</td>
+<td></td>
+</tr>
+<tr>
+<td>String methods: <code>length()</code>, <code>toCharArray()</code>, <code>format(..)</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>String</code></td>
+<td>literal immutable</td>
+</tr>
+<tr>
+<td><code>StringBuffer</code></td>
+<td>thread safe （method <em>synchronized</em> so 同时只有一个线程运行该方法）</td>
+</tr>
+<tr>
+<td><code>StringBuilder</code></td>
+<td>more efficient (no thread lock)</td>
+</tr>
+</tbody></table>
+<h1 id="Object-oriented"><a href="#Object-oriented" class="headerlink" title="Object oriented"></a>Object oriented</h1><p>Class basics</p>
+<ul>
+<li>Access ctrl modifier: <code>private</code> (本类), <code>_</code>(本包), <code>protected</code> (子类), <code>public</code> (所有类)</li>
+<li><code>[static] &#123;..&#125;</code>: initializer block<ul>
+<li><code>static</code>: run when obj declare (init as <code>null</code>)</li>
+<li>non-static: run with <code>new</code>, bf <code>con()</code> (Java compiler copy init blocks into con(…))</li>
+</ul>
+</li>
+<li>const: <code>static</code> + <code>final</code></li>
+<li>defalut constructor (from compiler): <code>ClassName() &#123;&#125;</code></li>
+<li>method: 6 components, method signature: name+param-list, method overload<ul>
+<li><code>return this;</code> in method [p142]</li>
+<li><code>main()</code>: class main entrance [p164]</li>
+</ul>
+</li>
+<li><code>static method()</code>: access static member directly, access instance member by obj ref <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/classvars.html">..</a></li>
+</ul>
+<p>Inheritance &amp; interface</p>
+<ul>
+<li><code>interface</code>: contract btw class &amp; outside-world (promises to provide the behavior of the interface)<ul>
+<li>member auto <code>public static final</code> [p174], cannot define inside a block <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/localclasses.html">..</a></li>
+<li>why only method no field: field usually private, method op on internal-state &amp; method usually public — serve as o2o interface with the outside world (data encapsulation)</li>
+</ul>
+</li>
+<li>up-cast — same as <code>Parent obj = new Child(); obj.xx</code>(xx must exist in Parent) [p164]</li>
+<li><code>instanceof</code> check real type (constructor); <code>null instanceof xx</code> ==&gt; false; <code>instanceof</code> bf down-cast </li>
+<li>Top class/default parent class: <code>Object</code><ul>
+<li>get class name: <code>Object.getClass().getName()</code> [p160]</li>
+</ul>
+</li>
+<li><code>abstract</code>: abstract-class vs interface [p174]</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html">Nested Class</a></p>
+<ul>
+<li>static nested class: access instance member by obj ref</li>
+<li>inner class: no own static members (e.g. <code>static &#123;..&#125;</code> &amp; interface) except const<ul>
+<li>local class (block): access enclosing fn param / effectively <code>final</code> local var<ul>
+<li>in static method, can only refer to outer.staticMembers</li>
+</ul>
+</li>
+<li>anonymous class (expr of class declare + instanciate, e.g. return, = ~, arg)<ul>
+<li>same member-restriction &amp; accessibity as local classes; no own con();</li>
+<li>suitable for interface contains &gt;=2 abstract methods, otherwise lambda expr</li>
+</ul>
+</li>
+<li>field shadowing (<code>OuterClass.this</code> =&gt; obj ref of OuterClass)</li>
+</ul>
+</li>
+</ul>
+<p>Others</p>
+<ul>
+<li><code>package</code> — namespace for related class &amp; interface<ul>
+<li><code>import java.util.*</code></li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/">Java SE API</a>: set of pkgs (class lib)</li>
+</ul>
+</li>
+<li>GC只能回收<code>new</code> obj — <code>Object.finalize()</code> &amp; <code>System.gc()</code>[p141]</li>
+</ul>
+<h1 id="Concurency-amp-Multi-thread"><a href="#Concurency-amp-Multi-thread" class="headerlink" title="Concurency &amp; Multi-thread"></a>Concurency &amp; Multi-thread</h1><ul>
+<li>进程(process)：每个独立运行的程序; CUP时间片：每个不同进程轮流执行</li>
+<li>当执行一个程序时，JVM自动产生一个线程来运行<code>main()</code> 运行；</li>
+<li>在java中实现线程的2种方式：<ul>
+<li>extends <code>java.lang.Thread</code> &amp; override <code>run()</code><ul>
+<li><code>run()</code>: 定义线程任务 (无限循环 + bool break 使线程一直运行下去)</li>
+<li><code>start()</code>: 启动线程 (call <code>run()</code> internal), 等待系统分配资源 &amp; 运行</li>
+</ul>
+</li>
+<li>impl <code>java.lang.Runable</code> (含 <code>run()</code>) — 继承非Thread类并在当前类中实现多线程<ul>
+<li><code>Thread t = new Thread(new Runnable())</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程的加入 <code>t2.join()</code> in <code>t1.run()</code>: 暂停当前进程，待t执行完毕后继续</li>
+<li>线程的暂停 <code>wait()</code>与恢复 <code>nodify()</code></li>
+<li>线程的中断 <code>interrupt()</code>：<ul>
+<li>call <code>sleep() / wait()</code> 进入就绪状态，</li>
+<li>call <code>interrupt()</code> 跳出<code>run()</code> &amp; throws <code>InterruptedException</code></li>
+</ul>
+</li>
+<li>线程同步 <code>synchronized</code>：防止多个线程访问资源的冲突，如dirty read — 共享资源上锁，某个时间内只允许一个线程访问该资源<ul>
+<li><code>synchronized (obj) &#123;..&#125;</code> &amp; <code>synchronized void method()</code>: 放置对共享资源的操作</li>
+</ul>
+</li>
+<li>线程优先级 <code>Thread.MAX/MIN_PRIORITY</code> (1<del>5</del>10): 增加/减少线程优先执行的概率，不保证顺序</li>
+</ul>
+<h1 id="Internet-Communication"><a href="#Internet-Communication" class="headerlink" title="Internet Communication"></a>Internet Communication</h1><ul>
+<li><strong>server</strong>: provide init info &amp; info processing; <strong>client</strong>: fetch info;</li>
+<li><strong>LAN</strong>: Local Area Network; <strong>WAN</strong>(Wide ~): link LANs, e.g. Internet, the worldwide WAN</li>
+<li>IP 协议 &amp; IP 地址； IPv4: 4字节/32位 binary; IPv6: 128 bits</li>
+<li>TCP/IP 协议: based on IP 协议 in Internet (4层)<ul>
+<li>TCP协议：一对一连接，，传输可靠（保证接收且顺序相同), 速度慢（需额外认证），e.g. HTTP, FTP, Telnet</li>
+<li>UDP协议：一对多，无连接，不保证可靠；数据包之间相对独立（接收顺序不重要），如即时聊天；</li>
+</ul>
+</li>
+<li>端口 port：数据交流的出口（0～65535），e.g. HTTP 80；FTP 21； 套接字socket：连接app &amp; port</li>
+<li>相关java类 <code>java.net.*</code><ul>
+<li><code>InetAddress</code>: 封装IP地址;</li>
+<li><code>SocketAddress</code>: IP + port</li>
+<li><code>ServerSocket</code> &amp; <code>Socket</code>: TCP 程序</li>
+<li><code>DatagramSocket</code> &amp; <code>DatagramPacket</code>: UDP 程序</li>
+</ul>
+</li>
+</ul>
+<p>TCP程序设计: </p>
+<ul>
+<li>server <code>new ServerSocket(port)</code> 等待client连接</li>
+<li>client <code>new Socket(host, port)</code>请求与server连接；</li>
+<li>server <code>accept()</code> 连接client并return <code>Socket</code>(如一直无client请求连接则阻塞)；<ul>
+<li>server创建新的Socket与client连接，</li>
+<li><code>server.accept()</code>return 该(与客户端Socket相连的)<code>Socket</code>；</li>
+</ul>
+</li>
+<li>server继续等待新的client连接</li>
+</ul>
+<p>note:</p>
+<ul>
+<li>server 一次与一个client socket连接；默认最大连接容量为50</li>
+<li><code>server.accept().getOutputStream()</code> = <code>clientSocket.getInputStream()</code> (server向outputStream写入信息时，client可通过InputStream 来读取，反之亦然)</li>
+</ul>
+<p>UDP程序设计:</p>
+<h1 id="JDBC-API-amp-DB-Access"><a href="#JDBC-API-amp-DB-Access" class="headerlink" title="JDBC API &amp; DB Access"></a>JDBC API &amp; DB Access</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>JDBC API: access tabular data (e.g. Realational DB, flat file or spreadsheet <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/cachedrowset.html">..</a>), included in JavaSE &amp; JavaEE <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html">..</a></p>
+<ul>
+<li>JDBC 4.0 API into 2 pkgs: <code>java.sql</code> &amp; Extension pkg <code>javax.sql</code>;</li>
+<li>supports both 2-tier &amp; 3-tier processing models for database access</li>
+</ul>
+<p><strong>JDBC driver</strong>: Drivers that impl JDBC API, dev by DB vendor <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/gettingstarted.html#step3">..</a>, used to communicate with data source <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html">..</a></p>
+<ul>
+<li>e.g. <strong>MySQL Connector/J</strong> (it impl network protocol to MySQL, client connects directly to MySQL) <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/gettingstarted.html#step3">..</a></li>
+<li>contains &gt;= 1 JDBC driver class (class impl interface <code>java.sql.Driver</code> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/connecting.html">..</a>)</li>
+<li>init/load by <code>Class.forName(java.sql.Driver)</code> (when <code>DriverManager</code> first attempts to connect <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/connecting.html">..</a>)</li>
+</ul>
+<p>JDBC Architecture</p>
+<ul>
+<li>2-tier model: <strong>java app with JDBC driver</strong> (client) -&gt; DBMS-proprietary protocol -&gt; <strong>DBMS</strong> (server);<br>  3-tire model: <strong>Java applet/HTML browser</strong> -&gt; HTTP.. -&gt; <strong>app server with JDBC..</strong> -&gt; <strong>DBMS</strong> (DB server)<ul>
+<li>extra middle tier: control access &amp; data updates; simplify the deployment of app</li>
+</ul>
+</li>
+</ul>
+<p>DB concepts ..</p>
+<ul>
+<li>table (aka relation): a collection of objects of the same type (rows)</li>
+<li>data in a table related by common keys or concepts</li>
+</ul>
+<h2 id="Programming-process"><a href="#Programming-process" class="headerlink" title="Programming process"></a>Programming process</h2><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/gettingstarted.html">Configuration</a></p>
+<ul>
+<li>Install DBMS &amp; JDBC driver from DB vendor (e.g. MySQL &amp; Connector/J) </li>
+<li>spec the JDBC driver class path (path of the JAR file that contains the [JDBC Driver] class specified in driver <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/tables.html">..</a>, e.g. <code>&quot;com.mysql.cj.jdbc.Driver&quot;</code>)</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/connecting.html">Connect to data source</a></p>
+<ul>
+<li>init JDBC driver by <code>Class.forName(java.sql.Driver)</code> (auto-load by <strong>DriverManager</strong> class for JDBC 4.0+)</li>
+<li>get connection (to a JDBC driver <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html">..</a>) by <code>DriverManager.getConnection(DB_URL, connProps)</code><ul>
+<li>DB_URL for MySQL Connector/J: <code>&quot;jdbc:mysql://$&#123;DB.HOST&#125;:$&#123;DB.PORT&#125;/&quot;</code></li>
+</ul>
+</li>
+</ul>
+<div class="note info no-icon"><p>or connect by <code>DataSource</code> (interface in Java EE) <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/sqldatasources.html#deploy_datasource">..</a></p>
+<ul>
+<li>basic ds: JDBC driver vendor impl <code>DataSource</code> interface &amp; deploy an obj for each data source</li>
+<li><strong>connection pool</strong> ds: <code>ConnectionPoolDataSource</code> obj (impl by JDBC driver vendor) impl connection pooling for <code>DataSource</code> obj (impl by EJB server vendor)</li>
+<li><strong>distributed transaction</strong> ds: <code>XADataSource</code> &amp; <code>DataSource</code></li>
+<li>connect by <code>ds.getConnection(..)</code>;</li>
+</ul>
+</div>
+<ul>
+<li>close conn in <code>finally</code></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html">Process SQL Stmts</a></p>
+<ul>
+<li>3 statements: <code>Statement</code>, <code>PreparedStatement</code>: precompiled, reusable stmt obj (with diff params by <code>ps.set*(..)</code>) <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html">..</a>, <code>CallableStatement</code> &amp; <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html" title="a group of SQL stmts that can be called by name (a static Java method), stored in DB metadata">stored procedure</a> <a href="">..</a></li>
+<li><code>execute()</code>, <code>executeQuery(query)</code>, <code>executeUpdate()</code></li>
+<li>batch updates: <code>int [] updateCounts = stmt.executeBatch()</code> (update count in int-arr returned by DBMS, batch list reset to empty)<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html">..</a></li>
+<li><code>ResultSet</code> interface <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html">..</a><ul>
+<li>JDBC driver-spec <code>DatabaseMetaData</code></li>
+<li>retrive column value: <code>rs.get*(colIndex/name/alias)</code> &amp; SQL <code>AS</code> in <code>SELECT</code></li>
+<li>insert/update/delete rows in rs: <code>rs.moveToInsertRow()</code>, <code>rs.update*(..)</code>, <code>rs.insert-/update-/deleteRow()</code>, <code>rs.moveToCurrentRow()</code> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/cachedrowset.html#updating-cachedrowset-object">..</a><ul>
+<li>insertion made immediately af current row <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/webrowset.html#data-webrowset">..</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>RowSet</code> interface, JavaBeans Component, scrollable &amp; updatable <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/rowset.html">..</a><ul>
+<li>1 connected <code>JdbcRowSet</code> &amp; 4 disconn (serializable &amp; lightweight, ideal for sending data over a network)</li>
+<li><code>CatchedRowSet</code>: super-interface for all disconn (extra <code>crs.acceptChanges(con)</code> to write data to DB)<ul>
+<li>caches data in memory, read/write by a <code>RowSetReader/Writer</code> obj (provided by the assigned <code>SyncProvider</code> instance when crs created)</li>
+<li>r/w work in bg: get conn, read/write data, close conn</li>
+<li>ref impl of the default <code>SyncProvider</code> obj: instance of the <code>RIOptimisticProvider</code> impl: (not) write to db if any/no conflict (with no db locks)</li>
+<li><code>SyncProviderException</code> &amp; <code>SyncResolver</code> when conflict: compare &amp; choose one</li>
+</ul>
+</li>
+<li><code>JoinRowSet</code>: join mtp disconn rs by <code>jrs.addRowSet(coffees, &quot;SUP_ID&quot;);</code></li>
+<li><code>WebRowSet</code>    : enable Web Services to send/receive data from db in XML doc (standard for Web Services comm)<ul>
+<li>sets <code>SyncProvider</code> obj to <code>RIXMLProvider</code> impl</li>
+<li><code>write-/readXml(..)</code>: convert wrs to/from xml</li>
+<li>contain data + col metadata </li>
+</ul>
+</li>
+<li><code>FilteredRowSet</code>: <code>frs.setFilter(Predicate)</code> (CRUD on current visible rows)</li>
+</ul>
+</li>
+<li>transaction &amp; DBMS locks <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html">..</a><ul>
+<li>default transaction isolation level depends on the DBMS &amp; <code>DatabaseMetaData</code> </li>
+<li><code>conn.rollback(SavePoint)</code> ..</li>
+</ul>
+</li>
+<li><code>conn/stmt/rs.close()</code> in <code>finally</code>: close conn also close stmt (good practice to close stmt explicitly) <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/tables.html">..</a>, close stmt also close rs</li>
+<li><code>SQLException</code>: throw when error during interaction with data source <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/sqlexception.html">..</a><ul>
+<li>errorCode: (DB vendor) imp-spec</li>
+<li>3 subclass of SQLException JDBC driver-spec might throw ..</li>
+</ul>
+</li>
+<li>JDBC 4.1 (Java SE 7+): allow <code>try-resrc</code> stmt <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">..</a> to auto close conn/stmt/resultSet even exception occur when the try block terminates </li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/sqltypes.html">Adv DB datatype</a>: BLOB, CLOB, XML, Locator (ogical pointer) ..<ul>
+<li>BLOB, CLOB, NCLOB: materialize data as a stream</li>
+<li>release resrc by <code>obj.free()</code></li>
+<li>MySQL not support XML (can store in LONGTEXT), ARRAY (max length) &amp; UDT (DISTINCT, struc) <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/jdbc/basics/sqlcustommapping.html">..</a>, RowID (JDBC interface: address to a row in a database table, not a standard SQL type)</li>
+<li>custom type mapping (from SQL data type to java data type), Datalink &amp; URL ..</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CallableStatement cablStmt = conn.prepareCall(<span class="string">&quot;&#123;call pro_GetInfo(?, ?)&#125;&quot;</span>); </span><br><span class="line">cablStmt.setString(<span class="number">1</span>, <span class="string">&quot;张%&quot;</span>); <span class="comment">// 将sql中第一个通配符(&quot;?&quot;)的值设为“张%” (动态sql)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// update</span></span><br><span class="line">stmt.executeUpdate(<span class="string">&quot;delete..&quot;</span>);</span><br><span class="line">ps = conn.prepareStatement(<span class="string">&quot;insert/update..&quot;</span>);</span><br><span class="line">ps.executeUpdate();</span><br><span class="line"></span><br><span class="line"><span class="comment">// batch op</span></span><br><span class="line">ps = conn.prepareStatement(<span class="string">&quot;insert/update..&quot;</span>);</span><br><span class="line">ps.clearBatch();</span><br><span class="line"><span class="keyword">for</span> (..) &#123;</span><br><span class="line">	ps.setString(<span class="number">1</span>, records[i][<span class="number">1</span>]);</span><br><span class="line">	ps.setString(<span class="number">2</span>, records[i][<span class="number">1</span>]);</span><br><span class="line">	ps.addBatch();</span><br><span class="line">&#125;</span><br><span class="line">ps.executeBatch();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h1><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/">Oracle Help Center</a> / Java / Java SE doc / Java Tut / Learning the Java Lang<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/index.html">Javase 8 API</a><br>《Java 从入门到精通》(项目案例版) 2017.9</p>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Chan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+<script src="/blog/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

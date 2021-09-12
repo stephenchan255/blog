@@ -2969,6 +2969,7 @@ mark.search-keyword {
 }
 .post-body ul {
   margin-top: 0;
+  margin-bottom: 0;
   padding-left: 20px;
 }
 .post-body ul li {
@@ -3034,4 +3035,19 @@ mark.search-keyword {
 }
 .post-body .nav-tabs li {
   margin: 0;
+}
+.post-body blockquote {
+  margin: 5px 0 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+.post-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+.post-body hr {
+  margin: -5px 0 5px;
+  background-color: #e4e4e4;
+}
+.post-body img {
+  margin-bottom: 0;
 }
